@@ -2,61 +2,66 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from './../actions/user.actions';
+import { Route, NavLink, HashRouter } from "react-router-dom";
+import { Content } from './Content';
 
 const Wrapper = {
-    color: "white",
-    position: "absolute",
-    top: "10px",
-    left: "10px" 
+  color: "black",
+  position: "absolute",
+  top: "0",
+  left: "0",
+  width: "100%"
+}
+
+const Nav = {
+  width: "100%",
+  height: "50px",
+  backgroundColor: "black"
+}
+
+const But = {
+  paddingRight: "40px",
+  display: "block",
+  float: "right",
+  fontSize: "30px",
+  height: "100%",
+  border: "4px solid black"
 }
 
 class HomePage extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(userActions.getAll());
-    }
+  componentDidMount() {
+    this.props.dispatch(userActions.getAll());
+  }
 
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
+  handleDeleteUser(id) {
+    return (e) => this.props.dispatch(userActions.delete(id));
+  }
 
-    render() {
-        const { user, users } = this.props;
-        return (
-            <div style={Wrapper}>
-                <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React!!</p>
-                <h3>All registered users:</h3>
-                {users.loading && <em>Loading users...</em>}
-                {users.error && <span className="text-danger">ERROR: {users.error}</span>}
-                {users.items &&
-                    <ul>
-                        {users.items.map((user, index) =>
-                            <li key={user.id}>
-                                {user.name + ' ' + user.surname}
-                                {
-                                    user.deleting ? <em> - Deleting...</em>
-                                    : user.deleteError ? <span className="text-danger"> - ERROR: {user.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                                }
-                            </li>
-                        )}
-                    </ul>
-                }
-                <p>
-                    <Link to="/login">Logout</Link>
-                </p>
-            </div>
-        );
-    }
+  render() {
+    const { user, users } = this.props;
+    return (
+      <div style={Wrapper}>
+        <nav style={Nav}>
+         <div style={But}>
+          <Link to="/login">Logout</Link>
+          </div>
+          <div style={But}>
+          <Link to="/">Home</Link>
+          </div>
+        </nav>
+       
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
-    const { user } = authentication;
-    return {
-        user,
-        users
-    };
+  const { users, authentication } = state;
+  const { user } = authentication;
+  return {
+    user,
+    users
+  };
 }
 
 const connectedHomePage = connect(mapStateToProps)(HomePage);
