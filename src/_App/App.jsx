@@ -9,7 +9,7 @@ import { LoginPage } from './../_LoginPage/LoginPage';
 import { RegisterPage } from './../_RegisterPage/RegisterPage';
 
 const Wrapper = {
-  marginTop: "10%"
+  marginTop: "6%"
 }
 
 class App extends React.Component {

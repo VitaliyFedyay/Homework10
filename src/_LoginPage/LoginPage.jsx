@@ -15,7 +15,7 @@ class LoginPage extends React.Component {
     this.props.dispatch(userActions.logout());
 
     this.state = {
-      username: '',
+      name: '',
       password: '',
       submitted: false
     };
@@ -33,25 +33,25 @@ class LoginPage extends React.Component {
     e.preventDefault();
 
     this.setState({ submitted: true });
-    const { username, password } = this.state;
+    const { name, password } = this.state;
     const { dispatch } = this.props;
-    if (username && password) {
-      dispatch(userActions.login(username, password));
+    if (name && password) {
+      dispatch(userActions.login(name, password));
     }
   }
 
   render() {
     const { loggingIn } = this.props;
-    const { username, password, submitted } = this.state;
+    const { name, password, submitted } = this.state;
     return (
       <div className="col-sm-8 col-sm-offset-2">
         <h2 style={{textAlign:"center"}}>Login</h2>
         <form style={{width:"70%",margin:"0 auto"}} name="form" onSubmit={this.handleSubmit}>
-          <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
-            <label htmlFor="username">Username</label>
-            <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange} />
-            {submitted && !username &&
-              <div className="help-block">Username is required</div>
+          <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
+            <label htmlFor="name">Name</label>
+            <input type="text" className="form-control" name="name" value={name} onChange={this.handleChange} />
+            {submitted && !name &&
+              <div className="help-block">name is required</div>
             }
           </div>
           <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
