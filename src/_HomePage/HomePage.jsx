@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { userActions } from './../actions/user.actions';
+
+const Wrapper = {
+    color: "white",
+    position: "absolute",
+    top: "10px",
+    left: "10px" 
+}
 
 class HomePage extends React.Component {
     componentDidMount() {
@@ -16,7 +22,7 @@ class HomePage extends React.Component {
     render() {
         const { user, users } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div style={Wrapper}>
                 <h1>Hi {user.firstName}!</h1>
                 <p>You're logged in with React!!</p>
                 <h3>All registered users:</h3>

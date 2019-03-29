@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
 
       <div style={Wrapper} className="container">
-        <div className="col-sm-8 col-sm-offset-2">
+        <div>
           {alert.message &&
             <div className={`alert ${alert.type}`}>{alert.message}</div>
           }
