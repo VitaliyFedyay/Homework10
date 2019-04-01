@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from './../actions/user.actions';
+import { SettingPage } from './../_SettingPage/SettingPage';
+import ToDoPage from './../_ToDoPage/ToDoPage';
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import { Content } from './Content';
+
 
 const Wrapper = {
   color: "black",
@@ -40,17 +42,27 @@ class HomePage extends React.Component {
   render() {
     const { user, users } = this.props;
     return (
+      <HashRouter>
       <div style={Wrapper}>
         <nav style={Nav}>
          <div style={But}>
           <Link to="/login">Logout</Link>
           </div>
           <div style={But}>
-          <Link to="/">Home</Link>
+          <Link to="/setting">Setting</Link>
+          </div>
+          <div style={But}>
+          <Link to="/todo">Home</Link>
           </div>
         </nav>
-       
+        <div>
+          <Route path="/setting" component={SettingPage}/>
+          <Route path="/todo" component={ToDoPage}/>
+
+        </div>
+        
       </div>
+      </HashRouter>
     );
   }
 }

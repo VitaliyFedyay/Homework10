@@ -1,6 +1,6 @@
 import React, { Component } from "react";
  
-class Content extends Component {
+class ToDoPage extends Component {
     
   render() {
     return (
@@ -12,11 +12,10 @@ class Content extends Component {
         metus nec massa. Maecenas hendrerit laoreet augue
         nec molestie. Cum sociis natoque penatibus et magnis
         dis parturient montes, nascetur ridiculus mus.</p>
- 
         <p>Duis a turpis sed lacus dapibus elementum sed eu lectus.</p>
       </div>
     );
   }
 }
 
-export default Content;
+export default ToDoPage;
