@@ -3,6 +3,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../actions/user.actions';
 
+const Container = {
+  marginTop: '5%',
+  margin: '0 auto',
+  width: '700px',
+  height: '500px',
+  background: '#fff',
+  borderRadius: '15px',
+  textAlign: 'center'
+}
+
 class SettingPage extends React.Component {
   componentDidMount() {
     this.props.dispatch(userActions.getAll());
@@ -15,22 +25,16 @@ class SettingPage extends React.Component {
   render() {
     const { user, users } = this.props;
     return (
-      <div className="col-md-6 col-md-offset-3">
+      <div style={Container}>
         <h1>Hi {user.name}!</h1>
-        <p>You're logged in with React!!</p>
-        <h3>All registered users:</h3>
+        <h3>USER SETTING:</h3>
         {users.loading && <em>Loading users...</em>}
         {users.items &&
           <ul>
             {users.items.map((user, index) =>
-              <li key={user.id}>
-                {user.name + ' ' + user.surname}
-                {
-                  user.deleting ? <em> - Deleting...</em>
-                    : user.deleteError ? <span className="error"> - ERROR: {user.deleteError}</span>
-                      : <span> - <a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>
-                }
-              </li>
+              <div key={user.id}>
+                <h3>{user.name + ' ' + user.surname + ' ' + user.email} <button onClick={this.handleDeleteUser(user.id)} className="btn btn-primary">Delete</button></h3>
+              </div>
             )}
           </ul>
         }

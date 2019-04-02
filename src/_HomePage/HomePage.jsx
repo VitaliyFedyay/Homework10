@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { userActions } from './../actions/user.actions';
 import { SettingPage } from './../_SettingPage/SettingPage';
 import ToDoPage from './../_ToDoPage/ToDoPage';
 import { Route, Link, HashRouter } from "react-router-dom";
-
 
 const Wrapper = {
   color: "black",
