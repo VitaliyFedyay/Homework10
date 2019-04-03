@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions } from '../actions/user.actions';
+import { userActions } from './../actions/user.actions';
 
 const Container = {
   marginTop: '5%',
@@ -13,40 +12,101 @@ const Container = {
   textAlign: 'center'
 }
 
+const Button = {
+  margin: "5px"
+}
+
 class SettingPage extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(userActions.getAll());
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        password: ''
+      },
+      submitted: false
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleDeleteUser(id) {
-    return (e) => this.props.dispatch(userActions.delete(id));
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { user } = this.state;
+    this.setState({
+      user: {
+        ...user,
+        [name]: value
+      }
+    });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.setState({ submitted: true });
+    const { user } = this.state;
+    const { dispatch } = this.props;
+    if (user.name && user.surname && user.email && user.phone && user.password) {
+      dispatch(userActions.register(user));
+    }
+  }
 
   render() {
-    const { user, users } = this.props;
+    const { registering } = this.props;
+    const { user, submitted } = this.state;
     return (
-      <div style={Container}>
-        <h1>Hi {user.name}!</h1>
-        <h3>USER SETTING:</h3>
-        {users.loading && <em>Loading users...</em>}
-        {users.items &&
-          <ul>
-            {users.items.map((user, index) =>
-              <div key={user.id}>
-                <h4>{user.name + ' ' + user.surname + ' ' + user.email} 
-                <button onClick={this.handleDeleteUser(user.id)} className="btn btn-primary">Delete</button>
-                </h4>
-              </div>
-            )}
-          </ul>
-        }
-        <form id="form" style={{display: "none"}}>
-          <input type='text' placeholder="name"></input>
-          <input type='text' placeholder="surname"></input>
-          <input type='text' placeholder="email"></input>
-          <input type='text' placeholder="phone"></input>
-          <input type='text' placeholder="password"></input>
+      <div className="col-sm-8 col-sm-offset-2" style={{ color: '#fff' }}>
+        <h2 style={{ textAlign: "center" }}>Create new user setting:</h2>
+        <form style={{ width: "70%", margin: "0 auto" }} name="form" onSubmit={this.handleSubmit}>
+
+          <div className={'form-group' + (submitted && !user.name ? ' has-error' : '')}>
+            <label htmlFor="name">Name</label>
+            <input type="text" className="form-control" name="name" value={user.name} onChange={this.handleChange} />
+            {submitted && !user.name &&
+              <div className="help-block">First Name is required</div>
+            }
+          </div>
+
+          <div className={'form-group' + (submitted && !user.surname ? ' has-error' : '')}>
+            <label htmlFor="surname">Surname</label>
+            <input type="text" className="form-control" name="surname" value={user.surname} onChange={this.handleChange} />
+            {submitted && !user.surname &&
+              <div className="help-block">Last Name is required</div>
+            }
+          </div>
+
+          <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
+            <label htmlFor="email">Email</label>
+            <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange} />
+            {submitted && !user.email &&
+              <div className="help-block">email is required</div>
+            }
+          </div>
+
+          <div className={'form-group' + (submitted && !user.phone ? ' has-error' : '')}>
+            <label htmlFor="phone">Phone</label>
+            <input type="text" className="form-control" name="phone" value={user.phone} onChange={this.handleChange} />
+            {submitted && !user.phone &&
+              <div className="help-block">phone is required</div>
+            }
+          </div>
+
+          <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
+            <label htmlFor="password">Password</label>
+            <input type="password" className="form-control" name="password" value={user.password} onChange={this.handleChange} />
+            {submitted && !user.password &&
+              <div className="help-block">Password is required</div>
+            }
+          </div>
+          <div className="form-group">
+            <button style={Button} className="btn btn-primary">Change user setting</button>
+          </div>
         </form>
       </div>
     );
@@ -54,13 +114,10 @@ class SettingPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication } = state;
-  const { user } = authentication;
+  const { registering } = state.registration;
   return {
-    user,
-    users
+    registering
   };
 }
-
 const connectedSettingPage = connect(mapStateToProps)(SettingPage);
 export { connectedSettingPage as SettingPage };

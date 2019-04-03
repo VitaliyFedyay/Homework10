@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { userActions } from './../actions/user.actions';
 
 const Button = {
-  margin:"5px"
+  margin: "5px"
 }
 
 class LoginPage extends React.Component {
@@ -44,9 +44,9 @@ class LoginPage extends React.Component {
     const { loggingIn } = this.props;
     const { name, password, submitted } = this.state;
     return (
-      <div className="col-sm-8 col-sm-offset-2" style={{color:'#fff'}}>
-        <h2 style={{textAlign:"center"}}>Login</h2>
-        <form style={{width:"70%",margin:"0 auto"}} name="form" onSubmit={this.handleSubmit}>
+      <div className="col-sm-8 col-sm-offset-2" style={{ color: '#fff' }}>
+        <h2 style={{ textAlign: "center" }}>Login</h2>
+        <form style={{ width: "70%", margin: "0 auto" }} name="form" onSubmit={this.handleSubmit}>
           <div className={'form-group' + (submitted && !name ? ' has-error' : '')}>
             <label htmlFor="name">Name</label>
             <input type="text" className="form-control" name="name" value={name} onChange={this.handleChange} />

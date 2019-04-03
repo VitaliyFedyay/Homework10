@@ -38,7 +38,7 @@ class HomePage extends React.Component {
           <div style={Wrapper}>
             <nav style={Nav}>
               <div style={But}>
-                <Link onClick="Router.dispatch(location.getCurrentPath(), null)" to="/login">Logout</Link>
+                <Link onClick='Router.dispatch(location.getCurrentPath(), null)' to="/login">Logout</Link>
               </div>
               <div style={But}>
                 <Link to="/setting">Setting</Link>
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
 
             <Route path="/setting" component={SettingPage} />
             <Route path="/todo" component={ToDoPage} />
-            <Redirect path="/login" component={LoginPage} />
+            <Route path="/login" component={LoginPage} />
 
           </Switch>
         </div>

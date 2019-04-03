@@ -52,7 +52,7 @@ class RegisterPage extends React.Component {
     const { registering } = this.props;
     const { user, submitted } = this.state;
     return (
-      <div className="col-sm-8 col-sm-offset-2" style={{color:'#fff'}}>
+      <div className="col-sm-8 col-sm-offset-2" style={{ color: '#fff' }}>
         <h2 style={{ textAlign: "center" }}>Register</h2>
         <form style={{ width: "70%", margin: "0 auto" }} name="form" onSubmit={this.handleSubmit}>
 
