@@ -8,6 +8,7 @@ import { HomePage } from './../_HomePage/HomePage';
 import { LoginPage } from './../_LoginPage/LoginPage';
 import { RegisterPage } from './../_RegisterPage/RegisterPage';
 import { SettingPage } from './../_SettingPage/SettingPage';
+import { ToDoPage } from './../_ToDoPage/ToDoPage';
 
 const Wrapper = {
   marginTop: "6%"
@@ -36,7 +37,8 @@ class App extends React.Component {
           <Router history={history}>
             <div>
               <PrivateRoute exact path="/" component={HomePage} />
-              <PrivateRoute exact path="/setting" component={SettingPage} />
+              <PrivateRoute path="/setting" component={SettingPage} />
+              <PrivateRoute path="/todo" component={ToDoPage} />
               <Route path="/login" component={LoginPage} />
               <Route path="/register" component={RegisterPage} />
             </div>

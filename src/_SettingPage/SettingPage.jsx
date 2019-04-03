@@ -22,6 +22,7 @@ class SettingPage extends React.Component {
     return (e) => this.props.dispatch(userActions.delete(id));
   }
 
+
   render() {
     const { user, users } = this.props;
     return (
@@ -33,11 +34,20 @@ class SettingPage extends React.Component {
           <ul>
             {users.items.map((user, index) =>
               <div key={user.id}>
-                <h3>{user.name + ' ' + user.surname + ' ' + user.email} <button onClick={this.handleDeleteUser(user.id)} className="btn btn-primary">Delete</button></h3>
+                <h4>{user.name + ' ' + user.surname + ' ' + user.email} 
+                <button onClick={this.handleDeleteUser(user.id)} className="btn btn-primary">Delete</button>
+                </h4>
               </div>
             )}
           </ul>
         }
+        <form id="form" style={{display: "none"}}>
+          <input type='text' placeholder="name"></input>
+          <input type='text' placeholder="surname"></input>
+          <input type='text' placeholder="email"></input>
+          <input type='text' placeholder="phone"></input>
+          <input type='text' placeholder="password"></input>
+        </form>
       </div>
     );
   }

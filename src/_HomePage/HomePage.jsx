@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { SettingPage } from './../_SettingPage/SettingPage';
 import ToDoPage from './../_ToDoPage/ToDoPage';
-import { Route, Link, HashRouter } from "react-router-dom";
+import LoginPage from './../_LoginPage/LoginPage';
+import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Wrapper = {
   color: "black",
@@ -28,31 +30,34 @@ const But = {
 }
 
 class HomePage extends React.Component {
- 
-
   render() {
     return (
-      <HashRouter>
-        <div style={Wrapper}>
-          <nav style={Nav}>
-            <div style={But}>
-              <Link to="/login">Logout</Link>
-            </div>
-            <div style={But}>
-              <Link to="/setting">Setting</Link>
-            </div>
-            <div style={But}>
-              <Link to="/todo">Home</Link>
-            </div>
-          </nav>
-          
-          <div>
+      <Router>
+        <div>
+          <div style={Wrapper}>
+            <nav style={Nav}>
+              <div style={But}>
+                <Link to="/login">Logout</Link>
+              </div>
+              <div style={But}>
+                <Link to="/setting">Setting</Link>
+              </div>
+              <div style={But}>
+                <Link to="/todo">Home</Link>
+              </div>
+            </nav>
+          </div>
+          <Switch>
+
             <Route path="/setting" component={SettingPage} />
             <Route path="/todo" component={ToDoPage} />
-          </div>
+            <Route path="/login" component={LoginPage} />
+
+          </Switch>
         </div>
-      </HashRouter>
-    );
+      </Router>
+
+    )
   }
 }
 

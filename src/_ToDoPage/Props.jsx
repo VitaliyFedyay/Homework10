@@ -7,7 +7,8 @@ const Li = {
 	background: '#fff',
 	width:'200px',
 	height:'200px',	
-	borderRadius: '10px'
+	borderRadius: '10px',
+	padding: '7px'
 }
 
 const Left = {
@@ -20,6 +21,11 @@ const Right = {
 	width:'400px',
 	height:'100%',	
 	borderRadius: '10px'
+}
+
+const DelBut = {
+	bottom: '2px',
+	marginRight: '2px'
 }
 
 export const TASK_STATUSES = {
@@ -36,22 +42,26 @@ export default (props) => {
 	};
 	const rlist = props.tasks.map((list, idx) =>
 		<div key={idx}>
-			<p style={Li} className="todo">{list}</p>
-			<Check className="check" color="white" size={17} onClick={() => handleDone(list)} />
-			<X className="cross" color="red" size={17} onClick={() => handleChange(list, TASK_STATUSES.TO_DO)} />
+			<p style={Li} className="todo">
+			{list}
+			<div style={DelBut}>
+			<Check className="check" color="green" size={22} onClick={() => handleDone(list)} />
+			<X className="cross" color="red" size={22} onClick={() => handleChange(list, TASK_STATUSES.TO_DO)} />
+			</div>
+			</p>
 		</div>
 	);
 	const dlist = props.done.map((done, idx) =>
 		<div key={idx}>
-			<p className="done">{done}<X className="cross" color="red" size={17} onClick={() => handleChange(done, TASK_STATUSES.DONE)} /></p>
+			<p className="done">{done}<X className="cross" color="red" size={22} onClick={() => handleChange(done, TASK_STATUSES.DONE)} /></p>
 			
 		</div>
 	);
 
 	return (
 		<div>
-			<span style={Left}>{rlist}{props.done.length}</span>
-			<span style={Right}>{dlist}</span>
+			<span style={Left}><h1 style={{textAlign:"center",background:"white", borderRadius: "15px", padding: '2px'}}>Unfinished tasks!</h1>{rlist}{props.done.length}</span>
+			<span style={Right}><h1 style={{textAlign:"center"}}>Complete task!</h1>{dlist}</span>
 		</div>
 	);
 }
